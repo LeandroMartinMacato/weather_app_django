@@ -1,7 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h2> Home Content </h2>
+<div class="content-container">
+    <h2 class="text-3xl"> Cities </h2>
+    <div>
+        {% for location in paged_data %}
+        <div>
+            <h3> {{location.name}} </h3>
+            <h4> {{location.info.weather}}</h4> 
+            <div>
+                <h3> {{location.info.temperature}}</h3>
+                <h5> Min:{{location.info.min_temp}}</h5>
+                <h5> Max:{{location.info.max_temp}}</h5>
+            </div>
+            <hr>
+        </div>
+        {% endfor %}
+        <hr> <br/>
+        {% if paged_data.has_previous %}
+            <a href="?page=1">&laquo First</a>
+            <a href="?page={{paged_data.previous_page_number}}">Previous</a>
+        {% endif %}
+        Page {{ paged_data.number }} of {{ paged_data.paginator.num_pages }}
+        {% if paged_data.has_next %}
+            <a href="?page={{paged_data.next_page_number}}">next</a>
+            <a href="?page={{paged_data.paginator.num_pages}}">last &raquo</a>
+        {% endif %}
+    </div>
+</div>
 
 {% endblock content %}

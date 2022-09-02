@@ -12,11 +12,11 @@ class coordinatesAPI():
         long = self.getLoc.longitude
 
         return {
-            "name" : name,
+            "address" : name,
             "lat" : lat,
             "long" : long
         }
 
 if __name__ == "__main__":
     coordAPI = coordinatesAPI()
-    print(coordAPI.getCoords("manila"))
+    print(coordAPI.getCoords("Dasmarinas"))

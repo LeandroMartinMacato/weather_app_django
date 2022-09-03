@@ -21,12 +21,25 @@ def home(request):
 
     locations_data = []
     for location in locations:
-        try:
-            geoInfo = coordAPI.getCoords(location["name"])
-        except Exception as e:
-            print(e)
-            logger.warning(f'Failed to get location coordinates data for "{location["name"]}" - {str(datetime.datetime.now())} ')
-            continue
+        if location["address"] == None or location["address"] == "" :
+            print(f"{location['name']} doesnt have coordinates")
+            try:
+                geoInfo = coordAPI.getCoords(location["name"])
+            except Exception as e:
+                print(e)
+                logger.warning(f'Failed to get location coordinates data for "{location["name"]}" - {str(datetime.datetime.now())} ')
+                continue
+            location_db_data = Location.objects.get(id = location["id"])
+            location_db_data.address = geoInfo["address"]
+            location_db_data.lat = geoInfo["lat"]
+            location_db_data.long = geoInfo["long"]
+            location_db_data.save()
+        else:
+            geoInfo = {
+                "address" : location["address"],
+                "lat" : location["lat"],
+                "long" : location["long"]
+            }
 
         try:
             weatherInfo =  weatherAPI.getWeather(geoInfo["lat"] , geoInfo["long"])

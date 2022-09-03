@@ -1,16 +1,15 @@
 <style>
 .navbar-container{
     background-color: #074560;
-    color: white;
-    display : flex;
 }
+
 </style>
 
+{% load static %}
+
 <nav class="navbar-container">
-    <div class="Header flex justify-center items-center my-2.5 rounded">
-            <h2> Icon </h2>
-            <!-- <img href="https://cdn-icons-png.flaticon.com/512/648/648198.png" alt="..." /> -->
-			<h1 class="Title text-4xl font-sans font-bold"> Weather State </h1>
-			<!-- <someIcon className="text-4xl ml-4" icon={faFeather} /> -->
+    <div class="flex justify-center py-2.5">
+            <img class="w-10" src="{% static 'images/icon.png' %}" alt="..." />
+			<h1 class="Title text-4xl font-sans font-bold text-amber-200"> Weather App </h1>
     </div>
 </nav>

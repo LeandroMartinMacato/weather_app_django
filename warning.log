@@ -1,0 +1,31 @@
+TypeError: bad operand type for unary +: 'str'
+Failed to get location coordinates data for "Manila" - 2022-09-03 19:12:58.109295 
+Failed to get location coordinates data for "Cebu" - 2022-09-03 19:12:58.624546 
+Failed to get location coordinates data for "Quezon City" - 2022-09-03 19:12:59.105827 
+Failed to get location coordinates data for "Baguio City" - 2022-09-03 19:12:59.594380 
+Failed to get location coordinates data for "Dasmarinas" - 2022-09-03 19:13:00.104917 
+Failed to get location coordinates data for "London" - 2022-09-03 19:13:00.642125 
+Failed to get location coordinates data for "Paris" - 2022-09-03 19:13:01.185419 
+Failed to get location coordinates data for "Bangkok" - 2022-09-03 19:13:01.773207 
+Failed to get location coordinates data for "New York" - 2022-09-03 19:13:02.272045 
+Failed to get location coordinates data for "Dubai" - 2022-09-03 19:13:02.777698 
+Failed to get weather data for "Manila" - 2022-09-03 19:13:47.689041 
+Failed to get weather data for "Cebu" - 2022-09-03 19:13:48.136698 
+Failed to get weather data for "Quezon City" - 2022-09-03 19:13:48.661318 
+Failed to get weather data for "Baguio City" - 2022-09-03 19:13:49.141231 
+Failed to get weather data for "Dasmarinas" - 2022-09-03 19:13:49.624212 
+Failed to get weather data for "London" - 2022-09-03 19:13:50.257917 
+Failed to get weather data for "Paris" - 2022-09-03 19:13:50.746658 
+Failed to get weather data for "Bangkok" - 2022-09-03 19:13:51.497629 
+Failed to get weather data for "New York" - 2022-09-03 19:13:51.902706 
+Failed to get weather data for "Dubai" - 2022-09-03 19:13:52.659664 
+Internal Server Error: /
+Traceback (most recent call last):
+  File "E:\~Projects\weather_app_django\env\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\~Projects\weather_app_django\env\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\~Projects\weather_app_django\core\views.py", line 48, in home
+    "min_temp": round.int(weatherInfo["low_temp"]),
+AttributeError: 'builtin_function_or_method' object has no attribute 'int'
+Failed to get weather data for "Macau" - 2022-09-03 20:26:07.016740 

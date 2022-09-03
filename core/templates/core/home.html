@@ -1,32 +1,80 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="content-container">
-    <h2 class="text-3xl"> Cities </h2>
+
+<div class="justify-center 
+    xl:mx-80 
+    lg:mx-40
+    md:mx-10
+    sm:mx-5
+    xs:mx-2
+    ">
+
+    <div class="text-center">
+        <div class="flex flex-col font-mono m-0">
+            <small class="text-2xl" id="txt"></small>
+            <small class="text-md" id="date"></small>
+        </div>
+        <hr class="mb-4">
+    </div>
+
     <div>
+
         {% for location in paged_data %}
-        <div>
-            <h3> {{location.name}} </h3>
-            <h4> {{location.info.weather}}</h4> 
-            <div>
-                <h3> {{location.info.temperature}}</h3>
-                <h5> Min:{{location.info.min_temp}}</h5>
-                <h5> Max:{{location.info.max_temp}}</h5>
+        <div class="flex content-center bg-yellow-50 drop-shadow-md mb-7 rounded-full px-2 py-2">
+            <div class="basis-1/2 flex-col text-center py-auto">
+                <h3 class="text-4xl font-serif"> {{location.name}} </h3>
+                <div class="flex flex-col">
+                    <small> {{location.address}}</small>
+                    <small> lat:{{location.lat}} | long:{{location.long}}</small>
+                </div>
+            </div>
+            <div class="basis-1/2 text-center">
+                <h3 class="text-3xl"> {{location.info.temperature}}°</h3>
+                <h3 class="text-2xl"> {{location.info.weather}}</h3> 
+                <small class=""> Min:{{location.info.min_temp}}°</small>
+                <small class=""> Max:{{location.info.max_temp}}°</small>
             </div>
             <hr>
         </div>
         {% endfor %}
-        <hr> <br/>
-        {% if paged_data.has_previous %}
-            <a href="?page=1">&laquo First</a>
-            <a href="?page={{paged_data.previous_page_number}}">Previous</a>
-        {% endif %}
-        Page {{ paged_data.number }} of {{ paged_data.paginator.num_pages }}
-        {% if paged_data.has_next %}
-            <a href="?page={{paged_data.next_page_number}}">next</a>
-            <a href="?page={{paged_data.paginator.num_pages}}">last &raquo</a>
-        {% endif %}
+
+        <div class="text-center">
+            <hr> <br/>
+            {% if paged_data.has_previous %}
+                <a href="?page=1">&laquo First</a>
+                <a href="?page={{paged_data.previous_page_number}}">Previous</a>
+            {% endif %}
+            Page {{ paged_data.number }} of {{ paged_data.paginator.num_pages }}
+            {% if paged_data.has_next %}
+                <a href="?page={{paged_data.next_page_number}}">next</a>
+                <a href="?page={{paged_data.paginator.num_pages}}">last &raquo</a>
+            {% endif %}
+        </div>
+
     </div>
 </div>
 
+<script>
+function startTime() {
+	const today = new Date();
+	let h = today.getHours();
+	let m = today.getMinutes();
+	let s = today.getSeconds();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+	m = checkTime(m);
+	s = checkTime(s);
+
+	document.getElementById("txt").innerHTML = h + ":" + m + ":" + s;
+    document.getElementById("date").innerHTML = date
+	setTimeout(startTime, 1000);
+}
+
+function checkTime(i) {
+	if (i < 10) {
+		i = "0" + i;
+	} // add zero in front of numbers < 10
+	return i;
+}
+</script>
 {% endblock content %}

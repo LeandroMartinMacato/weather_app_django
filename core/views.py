@@ -6,6 +6,11 @@ from .models import Location
 
 from django.core.paginator import Paginator
 
+import logging
+import datetime
+
+logger = logging.getLogger(__name__)
+
 
 # Create your views here.
 
@@ -18,8 +23,16 @@ def home(request):
     locations_data = []
     for location in locations:
         # print(location)
-        geoInfo = coordAPI.getCoords(location["name"])
-        weatherInfo =  weatherAPI.getWeather(geoInfo["lat"] , geoInfo["long"])
+
+        try:
+            geoInfo = coordAPI.getCoords(location["name"])
+        except Exception as e:
+            logger.warning(f'Failed to get location coordinates data for "{location["name"]}" - {+str(datetime.datetime.now())} ')
+
+        try:
+            weatherInfo =  weatherAPI.getWeather(geoInfo["lat"] , geoInfo["long"])
+        except Exception as e:
+            logger.warning(f'Failed to get weather data for "{location["name"]}" - {+str(datetime.datetime.now())} ')
 
         locations_data.append({
             "id" : location["id"],
@@ -37,7 +50,7 @@ def home(request):
         })
         
 
-    p = Paginator(locations_data , 3)
+    p = Paginator(locations_data , 5)
     page = request.GET.get('page')
     paged_data = p.get_page(page)
 

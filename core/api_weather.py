@@ -14,9 +14,12 @@ class WeatherAPI():
         weather = {
             "weather" : r["weather"][0]["main"],
             "description" : r["weather"][0]["description"],
+            "icon": r["weather"][0]["icon"],
             "temperature" : r["main"]["temp"],
             "low_temp" : r["main"]["temp_min"],
-            "max_temp" : r["main"]["temp_max"]
+            "max_temp" : r["main"]["temp_max"],
+            "pressure" : r["main"]["pressure"],
+            "humidity" : r["main"]["humidity"],
         }
         return weather
 

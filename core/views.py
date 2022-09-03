@@ -57,10 +57,13 @@ def home(request):
             "long": geoInfo["long"],
             "info": {
                 "weather": weatherInfo["weather"],
-                "description": weatherInfo["description"],
+                "description": str(weatherInfo["description"]).title() ,
+                "icon" : weatherInfo["icon"],
                 "temperature": weatherInfo["temperature"],
                 "min_temp": round(int(weatherInfo["low_temp"])),
                 "max_temp": round(int(weatherInfo["max_temp"])),
+                "pressure" : weatherInfo["pressure"],
+                "humidity": weatherInfo["humidity"]
             }
         })
         

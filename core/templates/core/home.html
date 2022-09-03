@@ -19,19 +19,26 @@
     </div>
 
     <div>
-
         {% for location in paged_data %}
         <div class="flex content-center bg-yellow-50 drop-shadow-md mb-7 rounded-full px-2 py-2">
-            <div class="basis-1/2 flex-col text-center py-auto">
+            <div class="basis-1/3 flex flex-col justify-center text-center py-auto mx-auto">
                 <h3 class="text-4xl font-serif"> {{location.name}} </h3>
                 <div class="flex flex-col">
                     <small> {{location.address}}</small>
                     <small> lat:{{location.lat}} | long:{{location.long}}</small>
                 </div>
             </div>
-            <div class="basis-1/2 text-center">
-                <h3 class="text-3xl"> {{location.info.temperature}}°</h3>
+            <div class="flex basis-1/3 text-center justify-center">
+                <img class="" src="http://openweathermap.org/img/wn/{{location.info.icon}}@2x.png" alt="..." />
+                <h3 class="text-3xl my-auto"> {{location.info.temperature}}°</h3>
+            </div>
+            <div class="basis-1/3 text-center">
                 <h3 class="text-2xl"> {{location.info.weather}}</h3> 
+                <h3> {{location.info.description}} </h3>
+                <h3> 
+                    <small>Pressure: {{location.info.pressure}}atm</small>
+                    <small>Humidity: {{location.info.humidity}}%</small> 
+                </h3>
                 <small class=""> Min:{{location.info.min_temp}}°</small>
                 <small class=""> Max:{{location.info.max_temp}}°</small>
             </div>
@@ -51,8 +58,8 @@
                 <a href="?page={{paged_data.paginator.num_pages}}">last &raquo</a>
             {% endif %}
         </div>
-
     </div>
+
 </div>
 
 <script>
